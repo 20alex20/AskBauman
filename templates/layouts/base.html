@@ -1,0 +1,200 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="title" content="Ask online Form">
+    <meta name="description"
+          content="The Ask is a bootstrap design help desk, support forum website template coded and designed with bootstrap Design, Bootstrap, HTML5 and CSS. Ask ideal for wiki sites, knowledge base sites, support forum sites">
+    <meta name="keywords"
+          content="HTML, CSS, JavaScript,Bootstrap,js,Forum,webstagram ,webdesign ,website ,web ,webdesigner ,webdevelopment">
+    <meta name="robots" content="index, nofollow">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="language" content="English">
+    <title>
+        {% if directory is None %}
+        {{ page }}
+        {% else %}
+        {{ directory }} / {{ page }}
+        {% endif %}
+    </title>
+    <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/css/style.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    {% if page == 'Задать вопрос' %}
+    <link href="../static/css/new_style.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/editor.css" rel="stylesheet" type="text/css">
+    {% endif %}
+</head>
+
+<body>
+
+
+<!-- ==========header mega navbar=======-->
+<div class="top-menu-bottom932">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header" style="display: block;">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false"
+                        style="margin-right: 0;margin-left: -5px;padding: 10px;">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div style="display: flex;">
+                    <a class="navbar-brand" href="{% url 'index' %}">
+                        <img src="{% static '/image/logo.png' %}" alt="Logo" height="52px">
+                    </a>
+                    <div class="navbar-serch-right-side" style="width: 100%;margin-left: 15px;margin-right: 5px;">
+                        <form class="navbar-form" role="search" style="padding: 0;width: 100%;border: 0;">
+                            <div class="input-group add-on">
+                                <input class="form-control form-control222" placeholder="Найти вопрос" id="srch-term"
+                                       type="text">
+                                <div class="input-group-btn" style="width: 1%;">
+                                    <button class="btn btn-default btn-default2913" type="button"><i
+                                            class="glyphicon glyphicon-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div><!-- Collect the nav links, forms, and other content for toggling -->
+                </div>
+            </div>
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="padding: 8px 0px 8px 5px;"
+                 aria-expanded="false">
+
+                <ul class="nav navbar-nav navbar-right" style="margin: auto 0;">
+                    <li><a href="/">На главную</a></li>
+
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                            aria-haspopup="true" aria-expanded="false">Вопросы по тегам <span
+                            class="caret"></span></a>
+                        <ul class="dropdown-menu animated zoomIn">
+                            {% for tag in tags %}
+                            <li><a href="{% url 'tag' page=tag %}">{{ tag }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+
+
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                            aria-haspopup="true" aria-expanded="false" style="display: flex;">
+                        <div style="margin: auto 60px auto 0;">Личный кабинет <span class="caret"> </span></div>
+                        <div class="left-user12923 left-user12923-repeat avatar"><img
+                                src="{% static '/image/images.png' %}"
+                                alt="image"></div>
+                    </a>
+                        <ul class="dropdown-menu animated zoomIn">
+                            <li><a href="{% url 'ask' %}">Задать вопрос</a></li>
+                            <li><a href="{% url 'my_qs' %}">Мои вопросы</a></li>
+                            <li><a href="{% url 'settings' %}">Мои данные</a></li>
+                            <li><a href="{% url 'index' %}">Выйти</a></li>
+
+
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+</div>
+
+<section class="header-descriptin329">
+    <div class="container">
+        <ol class="breadcrumb breadcrumb839">
+            {% if directory is not None %}
+            <li>{{ directory }}</li>
+            {% endif %}
+            <li class="active">{{ page }}</li>
+        </ol>
+    </div>
+</section>
+<!-- ======content section/body=====-->
+<section class="main-content920">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <!--end of col-md-9 -->
+            <!--strart col-md-3 (side bar)-->
+            <aside class="col-md-3 sidebar97239">
+                <!--          start tag part-->
+                <div class="tags-part2398">
+                    <h4>Теги</h4>
+                    <ul>
+                        {% for tag in tags %}
+                        <li><a href="{% url 'tag' page=tag %}">{{ tag }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <!--          End tag part-->
+                <!--              highest part-->
+                <div class="highest-part302">
+                    <h4>Лидеры сервиса</h4>
+                    {% for leader in leaders %}
+                    <hr>
+                    <div class="pints-wrapper">
+                        <div class="left-user3898">
+                            <img src="{% static '/image/images.png' %}" alt="Image"></div>
+
+                    </div>
+                    <div class="points-details938">
+                        <h5>{{ leader.nickname }}</h5>
+                        <span class="designetion439">{{ leader.type }}</span>
+                        <p>{{ leader.points }} баллов</p>
+                    </div>
+                    {% endfor %}
+                </div>
+                <!--               end of Highest points -->
+            </aside>
+        </div>
+    </div>
+</section>
+<!--    footer -->
+<section class="footer-social">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Сервис Спроси бауманца | <strong>Семенов Александр</strong></p>
+            </div>
+            <div class="col-md-6">
+                <div class="social-right2389">
+                    <a href="https://t.me/alex_fnaf">
+                        <i class="fa fa-telegram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://vk.ru/alex_fnaf">
+                        <i class="fa fa-vk" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+{% if page == 'Задать вопрос' or directory == 'Вопрос' %}
+<script src="{% static '/js/editor.js' %}"></script>
+<script>
+    $(document).ready(function () {
+        $("#txtEditor").Editor();
+    });
+</script>
+{% if page == 'Задать вопрос' %}
+<script src="{% static '/js/list.js' %}"></script>
+{% endif %}
+{% endif %}
+</body>
+
+</html>

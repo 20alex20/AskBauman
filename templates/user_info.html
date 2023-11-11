@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+{% block content %}
+<div class="ask-question-input-part032">
+    <h4 class="oh4">Мои данные</h4>
+    <hr>
+    <form>
+        <div class="question-title39">
+            <span class="form-description433">Логин </span><input type="text" name="login"
+                                                                  class="question-ttile32"
+                                                                  value="{{ user.login }}"
+                                                                  pattern="^[a-zA-Z0-9_]+$"
+                                                                  required
+                                                                  title="Латинские буквы и/или цифры"
+                                                                  minlength="5"
+                                                                  placeholder="Не менее 5 латинских букв и/или цифр">
+        </div>
+
+        <div class="question-title39">
+            <span class="form-description433">Никнейм </span><input type="text" name="nickname"
+                                                                    class="question-ttile32"
+                                                                    value="{{ user.nickname }}"
+                                                                    pattern="^[a-zA-Z0-9_]+$"
+                                                                    required
+                                                                    title="Латинские буквы и/или цифры"
+                                                                    minlength="3"
+                                                                    placeholder="Не менее 3 латинских букв и/или цифр">
+        </div>
+
+        <div class="question-title39">
+            <span class="form-description433">Почта </span><input type="email" name="email"
+                                                                  class="question-ttile32"
+                                                                  value="{{ user.email }}"
+                                                                  required
+                                                                  title="email@example.com"
+                                                                  placeholder="email@example.com">
+        </div>
+        <div class="question-title39">
+            <span class="form-description433">Картинка </span>
+            <div class="question-ttile32" style="display: inline-flex;height: auto;justify-content: space-between;">
+                <input type="file" name="image" accept="image/jpeg,image/png" style="margin: auto 0;">
+                <div class="div_img" style="background-image: url({% static '/image/images.png' %});"></div>
+            </div>
+        </div>
+
+        <div class="publish-button2389">
+            <input type="submit" class="publis1291" value="Изменить данные">
+        </div>
+    </form>
+
+</div>
+{% endblock %}

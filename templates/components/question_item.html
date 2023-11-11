@@ -1,0 +1,53 @@
+{% load static %}
+
+<div class="question-type2033">
+    <div class="row">
+        <div class="col-md-1">
+            <div class="left-user12923 left-user12923-repeat">
+                <img src="{% static '/image/images.png' %}" alt="image">
+                {% if question.solved %}
+                <a href="{% url 'question' page=question.id %}" title="Отвеченный">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="right-description893">
+                <div class="que-hedder2983">
+                    <h3><a href="{% url 'question' page=question.id %}" target="_blank">{{ question.title }}</a></h3>
+                </div>
+                <div class="ques-details10018">
+                    <p>{{ question.text }}</p>
+                </div>
+                {% if question.tags %}
+                <hr>
+                <div class="ques-icon-info3293">
+                    {% for tag in question.tags %}
+                    <a href="{% url 'tag' page=tag %}"><i class="fa fa-tag" aria-hidden="true"> {{ tag }}</i></a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="ques-type302">
+                <a href="{% url 'question' page=question.id %}">
+                    <button type="button" class="q-type238 button-ques2973">
+                        <i class="fa fa-comment" aria-hidden="true"> {{ question.answers }} ответов</i>
+                    </button>
+                </a>
+                <div>
+                    <button type="button" class="q-type23 cursor">
+                        <i class="fa fa-clock-o" aria-hidden="true"> {{ question.datetime }}</i>
+                    </button>
+                </div>
+                <div>
+                    <button type="button" class="q-type23 button-ques2973">
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.likes }} лайков</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

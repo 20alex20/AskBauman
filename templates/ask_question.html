@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="ask-question-input-part032">
+    <h4 class="oh4">Задать вопрос</h4>
+    <hr>
+    <form>
+        <div class="question-title39">
+            <span class="form-description433">Заголовок* </span>
+            <input type="text" name="fname" class="question-ttile32"
+                   placeholder="Напишите заголовок вопроса">
+        </div>
+
+        <div class="categori49"><span class="form-description43305">Теги* </span>
+            <div class="form_label">
+                <div class="multiselect_block">
+                    <div for="select-1" class="field_multiselect list-category53">
+                        <span style="padding: 8px 0;">Выберите подходящие теги</span>
+                        <button type="button" class="btn_multiselect" style="visibility: hidden;">____
+                        </button>
+                    </div>
+                    <input id="checkbox-1" class="multiselect_checkbox" type="checkbox">
+                    <label for="checkbox-1" class="multiselect_label"></label>
+                    <select id="select-1" class="field_select" name="technology" multiple=""
+                            style="@media (min-width: 768px) { height: calc(4 * 38px)}/* width: 100px; */">
+                        {% for tag in tags %}
+                        <option value="{{ tag }}">{{ tag }}</option>
+                        {% endfor %}
+                    </select>
+                    <span class="field_multiselect_help"><b></b></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="details2-239">
+            <span class="form-description23993">Текст</span>
+            <div class="col-md-12 nopadding">
+                <textarea id="txtEditor"></textarea>
+            </div>
+        </div>
+
+    </form>
+    <div class="publish-button2389">
+        <button type="button" class="publis1291">Опубликовать вопрос</button>
+    </div>
+
+</div>
+{% endblock %}

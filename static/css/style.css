@@ -1020,8 +1020,6 @@ hr {
     color: #1eb5b5;
     font-weight: bold;
     font-family: serif;
-    border-bottom: 2px solid #eaeaeb;
-    padding-bottom: 10px;
 }
 
 .left-user3898 {
@@ -2382,7 +2380,6 @@ h5:hover {
 .div_img {
     height: 70px;
     width: 70px;
-    background-image: url(../image/images.png);
     background-size: contain;
     border-radius: 35px;
 }
