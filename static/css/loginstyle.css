@@ -10,7 +10,8 @@ html {
 .title {
   text-transform: uppercase;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 20px;
   color: #1eb5b5;
   font-weight: 300;
   font-size: 24px;

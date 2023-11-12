@@ -3,41 +3,62 @@
 
 {% block content %}
 <div id="main">
+    {% if request.path == '/hot/' %}
+    <input id="tab1" type="radio" name="tabs">
+    <label for="tab1" class="fa-bullhorn">Последние опубликованные</label>
+    <input id="tab2" type="radio" name="tabs" checked>
+    {% else %}
     <input id="tab1" type="radio" name="tabs" checked>
     <label for="tab1" class="fa-bullhorn">Последние опубликованные</label>
     <input id="tab2" type="radio" name="tabs">
+    {% endif %}
     <label for="tab2" class="fa-comments">Самые обсуждаемые</label>
 
 
     <section id="content1">
-        <!--Recent Question Content Section -->
+        
         {% for question in questions %}
         {% include 'components/question_item.html' %}
         {% endfor %}
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
+                    <a href="{% url 'index' %}?page1={{ page_num1|add:-1 }}&page2={{ page_num2 }}" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
                     </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                    {% if max_num1 <= 5 %}
+                        {% for i in range1 %}
+                        <li><a href="{% url 'index' %}?page1={{ i }}&page2={{ page_num2 }}">{{ i }}</a></li>
+                        {% endfor %}
+                    {% else %}
+                        <li><a href="{% url 'index' %}?page1=1&page2={{ page_num2 }}">1</a></li>
+                        {% if page_num1 <= 3 %}
+                        <li><a href="{% url 'index' %}?page1=2&page2={{ page_num2 }}">2</a></li>
+                        <li><a href="{% url 'index' %}?page1=3&page2={{ page_num2 }}">3</a></li>
+                        <li><a href="#">…</a></li>
+                        {% elif page_num1 >= max_num1|add:-2 %}
+                        <li><a href="#">…</a></li>
+                        <li><a href="{% url 'index' %}?page1={{ max_num1|add:-2 }}&page2={{ page_num2 }}">{{ max_num1|add:-2 }}</a></li>
+                        <li><a href="{% url 'index' %}?page1={{ max_num1|add:-1 }}&page2={{ page_num2 }}">{{ max_num1|add:-1 }}</a></li>
+                        {% else %}
+                        <li><a href="#">…</a></li>
+                        <li><a href="{% url 'index' %}?page1={{ page_num1 }}&page2={{ page_num2 }}">{{ page_num1 }}</a></li>
+                        <li><a href="#">…</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'index' %}?page1={{ max_num1 }}&page2={{ page_num2 }}">{{ max_num1 }}</a></li>
+                    {% endif %}
                 <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
+                    <a href="{% url 'index' %}?page1={{ page_num1|add:1 }}&page2={{ page_num2 }}" aria-label="Next">
+                        <span aria-hidden="true">»</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </section>
-    <!--  End of content-1------>
 
     <section id="content2">
-        <!--Most Response Content Section -->
+        
 
         {% for question in questions2 %}
         {% include 'components/question_item.html' %}
@@ -46,25 +67,40 @@
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li>
-                    <a href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
+                    <a href="{% url 'hot' %}?page2={{ page_num2|add:-1 }}&page1={{ page_num1 }}" aria-label="Previous">
+                        <span aria-hidden="true">«</span>
                     </a>
                 </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+                    {% if max_num2 <= 5 %}
+                        {% for j in range2 %}
+                        <li><a href="{% url 'hot' %}?page2={{ j }}&page1={{ page_num1 }}">{{ j }}</a></li>
+                        {% endfor %}
+                    {% else %}
+                        <li><a href="{% url 'hot' %}?page2=1&page1={{ page_num1 }}">1</a></li>
+                        {% if page_num2 <= 3 %}
+                        <li><a href="{% url 'hot' %}?page2=2&page1={{ page_num1 }}">2</a></li>
+                        <li><a href="{% url 'hot' %}?page2=3&page1={{ page_num1 }}">3</a></li>
+                        <li><a href="#">…</a></li>
+                        {% elif page_num2 >= max_num2|add:-2 %}
+                        <li><a href="#">…</a></li>
+                        <li><a href="{% url 'hot' %}?page2={{ max_num2|add:-2 }}&page1={{ page_num1 }}">{{ max_num2|add:-2 }}</a></li>
+                        <li><a href="{% url 'hot' %}?page2={{ max_num2|add:-1 }}&page1={{ page_num1 }}">{{ max_num2|add:-1 }}</a></li>
+                        {% else %}
+                        <li><a href="#">…</a></li>
+                        <li><a href="{% url 'hot' %}?page2={{ page_num2 }}&page1={{ page_num1 }}">{{ page_num2 }}</a></li>
+                        <li><a href="#">…</a></li>
+                        {% endif %}
+                        <li><a href="{% url 'hot' %}?page2={{ max_num2 }}&page1={{ page_num1 }}">{{ max_num2 }}</a></li>
+                    {% endif %}
                 <li>
-                    <a href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
+                    <a href="{% url 'hot' %}?page2={{ page_num2|add:1 }}&page1={{ page_num1 }}" aria-label="Next">
+                        <span aria-hidden="true">»</span>
                     </a>
                 </li>
             </ul>
         </nav>
     </section>
 
-    <!----end of content-2----->
 
 </div>
 {% endblock %}

@@ -8,11 +8,10 @@
     <form>
         <div class="question-title39">
             <span class="form-description433">Заголовок* </span>
-            <input type="text" name="fname" class="question-ttile32"
-                   placeholder="Напишите заголовок вопроса">
+            <input type="text" name="title" class="question-ttile32" required placeholder="Напишите заголовок вопроса">
         </div>
 
-        <div class="categori49"><span class="form-description43305">Теги* </span>
+        <div class="categori49"><span class="form-description43305">Теги </span>
             <div class="form_label">
                 <div class="multiselect_block">
                     <div for="select-1" class="field_multiselect list-category53">
@@ -22,8 +21,8 @@
                     </div>
                     <input id="checkbox-1" class="multiselect_checkbox" type="checkbox">
                     <label for="checkbox-1" class="multiselect_label"></label>
-                    <select id="select-1" class="field_select" name="technology" multiple=""
-                            style="@media (min-width: 768px) { height: calc(4 * 38px)}/* width: 100px; */">
+                    <select id="select-1" class="field_select" name="tags" multiple
+                            style="@media (min-width: 768px) { height: calc(4 * 38px)}">
                         {% for tag in tags %}
                         <option value="{{ tag }}">{{ tag }}</option>
                         {% endfor %}
@@ -33,6 +32,12 @@
             </div>
         </div>
 
+        <div class="question-title39">
+            <span class="form-description433">Новые теги </span>
+            <input type="text" name="new_tags" class="question-ttile32"
+                   placeholder="Перечислите новые теги через запятую">
+        </div>
+
         <div class="details2-239">
             <span class="form-description23993">Текст</span>
             <div class="col-md-12 nopadding">
@@ -40,10 +45,10 @@
             </div>
         </div>
 
+        <div class="publish-button2389">
+            <input type="submit" class="publis1291" value="Опубликовать вопрос" style="border: 0;">
+        </div>
     </form>
-    <div class="publish-button2389">
-        <button type="button" class="publis1291">Опубликовать вопрос</button>
-    </div>
 
 </div>
 {% endblock %}

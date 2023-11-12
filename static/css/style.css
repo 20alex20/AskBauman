@@ -1490,6 +1490,7 @@ h5:hover {
 
 .categori49 {
     margin-top: 30px;
+    padding-bottom: 10px;
 }
 
 .list-category53 {
@@ -1903,7 +1904,7 @@ h5:hover {
 
 
 .comments-list .comment-box {
-    width: 62%;
+    width: 91%;
     float: left;
     position: relative;
     -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
@@ -1935,7 +1936,6 @@ h5:hover {
 }
 
 .comment-box .comment-head {
-    background: #FCFCFC;
     padding: 10px 12px;
     border-bottom: 1px solid #E5E5E5;
     overflow: hidden;
@@ -2293,7 +2293,7 @@ h5:hover {
 }
 
 .navbar-header {
-    width: calc(100% - 531px);
+    width: calc(100% - 532.4px);
 }
 
 @media (max-width: 992px) {

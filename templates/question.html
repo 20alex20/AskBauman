@@ -1,107 +1,115 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block content %}
-                <div class="post-details">
-                    <div class="details-header923">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="post-title-left129">
-                                    <h3>{{ question.title }}</h3>
+<div class="post-details">
+    <div class="details-header923">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="post-title-left129">
+                    <h3>{{ question.title }}</h3>
+                </div>
+            </div>
+            {% if question.solved %}
+            <div class="col-md-4 left-user12923 " style="float: right;">
+                <i class="fa fa-check" aria-hidden="true" style="margin-top: 5px;float: right;"></i>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="post-details-info1982">
+        {% for p in question.text %}
+        <p>{{ p }}</p>
+        {% endfor %}
+        <hr>
+        <div class="post-footer29032">
+            <div class="l-side2023">
+                <i class="fa fa-clock-o" aria-hidden="true"> {{ question.datetime }}</i>
+                <i class="fa fa-commenting" aria-hidden="true"> {{ question.answers }} ответов</i>
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.likes }} лайков</i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="share-tags-page-content12092" style="display: flex;justify-content: space-between;">
+    <button type="button" class="q-type23 button-ques2973" style="margin: 0;">
+        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 14px;"> Поставить лайк</i>
+    </button>
+    <div class="ques-icon-info3293" style="margin: auto 0;font-size: 14px;">
+        {% for tag in question.tags %}
+        <a href="{% url 'tag' page=tag %}"><i class="fa fa-tag" aria-hidden="true"> {{ tag }}</i></a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="author-details8392" style="padding: 20px 15px;">
+    <div class="pints-wrapper">
+        <div class="left-user3898">
+            <img src="{% static '/image/images.png' %}" alt="Image">
+        </div>
+    </div>
+    <div class="points-details938">
+        <h5 style="margin: 0 0 10px 0;font-size: 16px !important;">{{ user.nickname }}</h5>
+        <div style="font-size: 15px !important;"><span class="designetion439">{{ user.type }}</span>
+            <p style="float: right;">{{ user.points }} баллов</p></div>
+    </div>
+</div>
+
+<div class="comment-list12993">
+    <div style="padding-right: 15px;padding-left: 15px;">
+        <div class="row">
+
+            <div class="comments-container">
+                <ul id="comments-list" class="comments-list">
+                    {% for answer in answers %}
+                    <li>
+                        <div class="comment-main-level">
+                            
+                            <div class="comment-avatar">
+                                <img src="{% static '/image/images.png' %}" alt="">
+                            </div>
+                            
+                            <div class="comment-box">
+                                <div class="comment-head">
+                                    <h6 class="comment-name">{{ answer.user.nickname }}</h6>
+                                    <div>
+                                        <i class="fa fa-clock-o" aria-hidden="true"> {{ answer.datetime }}</i>
+                                    </div>
+                                    <span>Лучший ответ <i class="fa fa-square-o"></i></span>
+                                </div>
+                                <div class="comment-content">
+                                    {{ answer.text }}
                                 </div>
                             </div>
-                            {% if question.solved %}
-                            <div class="col-md-4 left-user12923 " style="float: right;">
-                                <i class="fa fa-check" aria-hidden="true" style="margin-top: 5px;float: right;"></i>
-                            </div>
-                            {% endif %}
                         </div>
-                    </div>
-                    <div class="post-details-info1982">
-                        {% for p in question.text %}
-                        <p>{{ p }}</p>
-                        {% endfor %}
-                        <hr>
-                        <div class="post-footer29032">
-                            <div class="l-side2023">
-                                <i class="fa fa-clock-o" aria-hidden="true"> {{ question.datetime }}</i>
-                                <i class="fa fa-commenting" aria-hidden="true"> {{ question.answers }} ответов</i>
-                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.likes }} лайков</i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+                <nav aria-label="Page navigation" style="text-align: center;">
+                    {% include 'components/paginator_item.html' %}
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
 
-                <div class="share-tags-page-content12092" style="display: flex;justify-content: space-between;">
-                    <button type="button" class="q-type23 button-ques2973" style="margin: 0;">
-                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 14px;"> Поставить лайк</i>
-                    </button>
-                    <div class="ques-icon-info3293" style="margin: auto 0;font-size: 14px;">
-                        {% for tag in question.tags %}
-                        <a href="{% url 'tag' page=tag %}"><i class="fa fa-tag" aria-hidden="true"> {{ tag }}</i></a>
-                        {% endfor %}
-                    </div>
-                </div>
+{% if authorized %}
+<div class="ask-question-input-part032" style="margin-top: 20px;">
+    <h4 class="oh4">Написать ответ</h4>
+    <hr>
+    <form>
+        <div class="col-md-12 nopadding">
+            <textarea id="txtEditor"></textarea>
+        </div>
 
-                <div class="author-details8392" style="padding: 20px 15px;">
-                    <div class="pints-wrapper">
-                        <div class="left-user3898">
-                            <img src="{% static '/image/images.png' %}" alt="Image">
-                        </div>
-                    </div>
-                    <div class="points-details938">
-                        <h5 style="margin: 0 0 10px 0;font-size: 16px !important;">{{ user.nickname }}</h5>
-                        <div style="font-size: 15px !important;"><span class="designetion439">{{ leader.type }}</span>
-                            <p style="float: right;">{{ leader.points }} баллов</p></div>
-                    </div>
-                </div>
+    </form>
+    <div class="publish-button2389">
+        <button type="button" class="publis1291">Опубликовать ответ</button>
+    </div>
 
-                <div class="comment-list12993">
-                    <div class="container">
-                        <div class="row">
+</div>
+{% endif %}
 
-                            <div class="comments-container">
-                                <ul id="comments-list" class="comments-list">
-                                    {% for answer in qnswers %}
-                                    <li>
-                                        <div class="comment-main-level">
-                                            <!-- Avatar -->
-                                            <div class="comment-avatar">
-                                                <img src="{% static '/image/images.png' %}" alt="">
-                                            </div>
-                                            <!-- Contenedor del Comentario -->
-                                            <div class="comment-box">
-                                                <div class="comment-head">
-                                                    <h6 class="comment-name">Lorena Rojero</h6>
-                                                    <div><i class="fa fa-clock-o" aria-hidden="true"> 01.01.2023
-                                                        12:00</i></div>
-                                                    <span>Лучший ответ <i class="fa fa-square-o"></i></span></div>
-                                                <div class="comment-content"> Lorem ipsum dolor sit amet, consectetur
-                                                    adipisicing elit. Velit omnis animi et iure laudantium vitae,
-                                                    praesentium optio, sapiente distinctio illo?
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    {% endfor %}
-                                </ul>
+<div style="height: 50px;width: 100%;"></div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ask-question-input-part032" style="margin-bottom: 50px;margin-top: 20px;">
-                    <h4 class="oh4">Написать ответ</h4>
-                    <hr>
-                    <form>
-                        <div class="col-md-12 nopadding">
-                            <textarea id="txtEditor"></textarea>
-                        </div>
-
-                    </form>
-                    <div class="publish-button2389">
-                        <button type="button" class="publis1291">Опубликовать ответ</button>
-                    </div>
-
-                </div>
 {% endblock %}

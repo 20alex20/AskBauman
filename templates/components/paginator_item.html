@@ -1,0 +1,33 @@
+<ul class="pagination">
+<li>
+    <a href="?page={{ page_num|add:-1 }}" aria-label="Previous">
+        <span aria-hidden="true">«</span>
+    </a>
+</li>
+{% if max_num <= 5 %}
+    {% for i in range %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endfor %}
+{% else %}
+    <li><a href="?page=1">1</a></li>
+    {% if page_num <= 3 %}
+    <li><a href="?page=2">2</a></li>
+    <li><a href="?page=3">3</a></li>
+    <li><a href="#">…</a></li>
+    {% elif page_num >= max_num|add:-2 %}
+    <li><a href="#">…</a></li>
+    <li><a href="?page={{ max_num|add:-2 }}">{{ max_num|add:-2 }}</a></li>
+    <li><a href="?page={{ max_num|add:-1 }}">{{ max_num|add:-1 }}</a></li>
+    {% else %}
+    <li><a href="#">…</a></li>
+    <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+    <li><a href="#">…</a></li>
+    {% endif %}
+    <li><a href="?page={{ max_num }}">{{ max_num }}</a></li>
+{% endif %}
+<li>
+    <a href="?page={{ page_num|add:1 }}" aria-label="Next">
+        <span aria-hidden="true">»</span>
+    </a>
+</li>
+</ul>
