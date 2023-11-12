@@ -1,206 +1,57 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="title" content="Ask online Form">
-    <meta name="description"
-          content="The Ask is a bootstrap design help desk, support forum website template coded and designed with bootstrap Design, Bootstrap, HTML5 and CSS. Ask ideal for wiki sites, knowledge base sites, support forum sites">
-    <meta name="keywords"
-          content="HTML, CSS, JavaScript,Bootstrap,js,Forum,webstagram ,webdesign ,website ,web ,webdesigner ,webdevelopment">
-    <meta name="robots" content="index, nofollow">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="language" content="English">
-    <title>Ask Me</title>
-    <link href="{% static '/css/bootstrap.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '/css/style.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '/css/responsive.css' %}" rel="stylesheet" type="text/css">
-    <link href="{% static '/css/editor.css' %}" rel="stylesheet" type="text/css">
-</head>
-
-<body>
-
-
-<!-- ==========header mega navbar=======-->
-<div class="top-menu-bottom932">
-    <nav class="navbar navbar-default">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header" style="display: block;">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                        data-target="#bs-example-navbar-collapse-1" aria-expanded="false" style="
-    margin-right: 0;
-    margin-left: -5px;
-    padding: 10px;
-"><span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
-                </button>
-                <div style="
-    display: flex;
-">
-                    <a class="navbar-brand" href="/public"><img src="{% static '/image/logo.png' %}" alt="Logo"
-                                                                height="52px"></a>
-                    <div class="navbar-serch-right-side" style="width: 100%;margin-left: 15px;margin-right: 5px;">
-                        <form class="navbar-form" role="search" style="
-    padding: 0;
-    width: 100%;
-    border: 0;
-">
-                            <div class="input-group add-on">
-                                <input class="form-control form-control222" placeholder="Найти вопрос" id="srch-term"
-                                       type="text">
-                                <div class="input-group-btn" style="width: 1%;">
-                                    <button class="btn btn-default btn-default2913" type="button"><i
-                                            class="glyphicon glyphicon-search"></i></button>
-                                </div>
-                            </div>
-                        </form>
-                    </div><!-- Collect the nav links, forms, and other content for toggling -->
-                </div>
-            </div>
-            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" style="padding: 8px 0px 8px 5px;"
-                 aria-expanded="false">
-
-                <ul class="nav navbar-nav navbar-right" style="
-    margin: auto 0;
-">
-                    <li><a href="/public">На главную</a></li>
-
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false">Вопросы по тегам <span
-                            class="caret"></span></a>
-                        <ul class="dropdown-menu animated zoomIn">
-                            <li><a href="tag/analytics">analytics</a></li>
-                            <li><a href="tag/computer">Computer</a></li>
-                            <li><a href="tag/developer">Developer</a></li>
-                            <li><a href="tag/google">Google</a></li>
-                            <li><a href="tag/interview">Interview</a></li>
-                            <li><a href="tag/programmer">Programmer</a></li>
-                            <li><a href="tag/salary">Salary</a></li>
-                            <li><a href="tag/university">University</a></li>
-                            <li><a href="tag/employee">Employee</a></li>
-                        </ul>
-                    </li>
-
-
-                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                            aria-haspopup="true" aria-expanded="false" style="
-    display: flex;
-">
-                        <div style="
-    margin: auto 60px auto 0;
-">Личный кабинет <span class="caret"> </span></div>
-                        <div class="left-user12923 left-user12923-repeat avatar"><img
-                                src="{% static '/image/images.png' %}"
-                                alt="image"></div>
-                    </a>
-                        <ul class="dropdown-menu animated zoomIn">
-                            <li><a href="ask">Задать вопрос</a></li>
-                            <li><a href="my_questions">Мои вопросы</a></li>
-                            <li><a href="settings">Мои данные</a></li>
-                            <li><a href="logout">Выйти</a></li>
-
-
-                        </ul>
-                    </li>
-
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-</div>
-
-<section class="header-descriptin329">
-    <div class="container">
-        <ol class="breadcrumb breadcrumb839">
-            <li>Вопросы</li>
-            <li class="active">This Is My first Question</li>
-        </ol>
-    </div>
-</section>
-<!-- ======content section/body=====-->
-<section class="main-content920">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
+{% block content %}
                 <div class="post-details">
                     <div class="details-header923">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="post-title-left129">
-                                    <h3>This Is My first Question</h3></div>
+                                    <h3>{{ question.title }}</h3>
+                                </div>
                             </div>
-                            <div class="col-md-4 left-user12923 " style="
-    float: right;
-">
-                                <i class="fa fa-check" aria-hidden="true" style="
-    margin-top: 5px;
-    float: right;
-"></i>
+                            {% if question.solved %}
+                            <div class="col-md-4 left-user12923 " style="float: right;">
+                                <i class="fa fa-check" aria-hidden="true" style="margin-top: 5px;float: right;"></i>
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="post-details-info1982">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit
-                            amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus
-                            vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla
-                            ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et
-                            malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis
-                            condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor
-                            felis pharetra eu .</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi adipiscing gravida odio, sit
-                            amet suscipit risus ultrices eu. Fusce viverra neque at purus laoreet consequat. Vivamus
-                            vulputate posuere nisl quis consequat. Donec congue commodo mi, sed commodo velit fringilla
-                            ac. Fusce placerat venenatis mi. Pellentesque habitant morbi tristique senectus et netus et
-                            malesuada fames ac turpis egestas. Cras ornare, dolor a aliquet rutrum, dolor turpis
-                            condimentum leo, a semper lacus purus in felis. Quisque blandit posuere turpis, eget auctor
-                            felis pharetra eu .</p>
+                        {% for p in question.text %}
+                        <p>{{ p }}</p>
+                        {% endfor %}
                         <hr>
                         <div class="post-footer29032">
-                            <div class="l-side2023"><i class="fa fa-clock-o" aria-hidden="true"> 4 мин назад</i> <i
-                                    class="fa fa-commenting" aria-hidden="true"> 5 ответов</i> <i
-                                    class="fa fa-thumbs-o-up" aria-hidden="true"> 70 лайков</i></div>
-
+                            <div class="l-side2023">
+                                <i class="fa fa-clock-o" aria-hidden="true"> {{ question.datetime }}</i>
+                                <i class="fa fa-commenting" aria-hidden="true"> {{ question.answers }} ответов</i>
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.likes }} лайков</i>
+                            </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="share-tags-page-content12092" style="display: flex;justify-content: space-between;">
                     <button type="button" class="q-type23 button-ques2973" style="margin: 0;">
-                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="
-    font-size: 14px;
-"> Поставить лайк</i>
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 14px;"> Поставить лайк</i>
                     </button>
                     <div class="ques-icon-info3293" style="margin: auto 0;font-size: 14px;">
-                        <a href="tag/developer"><i class="fa fa-tag" aria-hidden="true">
-                            Developer</i></a>
-                        <a href="tag/computer"><i class="fa fa-tag" aria-hidden="true"> Computer</i></a>
+                        {% for tag in question.tags %}
+                        <a href="{% url 'tag' page=tag %}"><i class="fa fa-tag" aria-hidden="true"> {{ tag }}</i></a>
+                        {% endfor %}
                     </div>
                 </div>
+
                 <div class="author-details8392" style="padding: 20px 15px;">
                     <div class="pints-wrapper">
                         <div class="left-user3898">
-                            <img src="{% static '/image/images.png' %}" alt="Image"></div>
-
+                            <img src="{% static '/image/images.png' %}" alt="Image">
+                        </div>
                     </div>
                     <div class="points-details938">
-                        <h5 style="
-    margin: 0 0 10px 0;
-    font-size: 16px !important;
-">alex_nickname</h5>
-                        <div style="
-    font-size: 15px !important;
-"><span class="designetion439">Гений</span>
-                            <p style="
-    float: right;
-">206 баллов</p></div>
+                        <h5 style="margin: 0 0 10px 0;font-size: 16px !important;">{{ user.nickname }}</h5>
+                        <div style="font-size: 15px !important;"><span class="designetion439">{{ leader.type }}</span>
+                            <p style="float: right;">{{ leader.points }} баллов</p></div>
                     </div>
                 </div>
 
@@ -210,11 +61,13 @@
 
                             <div class="comments-container">
                                 <ul id="comments-list" class="comments-list">
+                                    {% for answer in qnswers %}
                                     <li>
                                         <div class="comment-main-level">
                                             <!-- Avatar -->
-                                            <div class="comment-avatar"><img src="{% static '/image/images.png' %}"
-                                                                             alt=""></div>
+                                            <div class="comment-avatar">
+                                                <img src="{% static '/image/images.png' %}" alt="">
+                                            </div>
                                             <!-- Contenedor del Comentario -->
                                             <div class="comment-box">
                                                 <div class="comment-head">
@@ -229,32 +82,14 @@
                                             </div>
                                         </div>
                                     </li>
-                                    <li>
-                                        <div class="comment-main-level">
-                                            <!-- Avatar -->
-                                            <div class="comment-avatar"><img src="{% static '/image/images.png' %}"
-                                                                             alt=""></div>
-                                            <!-- Contenedor del Comentario -->
-                                            <div class="comment-box">
-                                                <div class="comment-head">
-                                                    <h6 class="comment-name">Lorena Rojero</h6>
-                                                    <div><i class="fa fa-clock-o" aria-hidden="true"> 01.01.2023
-                                                        12:00</i></div>
-                                                    <span>Лучший ответ <i class="fa fa-square-o"></i></span></div>
-                                                <div class="comment-content"> Lorem ipsum dolor sit amet, consectetur
-                                                    adipisicing elit. Velit omnis animi et iure laudantium vitae,
-                                                    praesentium optio, sapiente distinctio illo?
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
+                                    {% endfor %}
                                 </ul>
 
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div class="ask-question-input-part032" style="margin-bottom: 50px;margin-top: 20px;">
                     <h4 class="oh4">Написать ответ</h4>
                     <hr>
@@ -269,114 +104,4 @@
                     </div>
 
                 </div>
-            </div>
-
-            <!--end of col-md-9 -->
-            <!--strart col-md-3 (side bar)-->
-            <aside class="col-md-3 sidebar97239">
-                <!--          start tag part-->
-                <div class="tags-part2398">
-                    <h4>Теги</h4>
-                    <ul>
-                        <li><a href="tag/analytics">analytics</a></li>
-                        <li><a href="tag/computer">Computer</a></li>
-                        <li><a href="tag/developer">Developer</a></li>
-                        <li><a href="tag/google">Google</a></li>
-                        <li><a href="tag/interview">Interview</a></li>
-                        <li><a href="tag/programmer">Programmer</a></li>
-                        <li><a href="tag/salary">Salary</a></li>
-                        <li><a href="tag/university">University</a></li>
-                        <li><a href="tag/employee">Employee</a></li>
-                    </ul>
-                </div>
-                <!--          End tag part-->
-                <!--              highest part-->
-                <div class="highest-part302">
-                    <h4>Лидеры сервиса</h4>
-                    <div class="pints-wrapper">
-                        <div class="left-user3898">
-                            <img src="{% static '/image/images.png' %}" alt="Image"></div>
-
-                    </div>
-                    <div class="points-details938">
-                        <h5>Ahmed Hasan</h5>
-                        <span class="designetion439">Гений</span>
-                        <p>206 баллов</p>
-                    </div>
-                    <hr>
-                    <div class="pints-wrapper">
-                        <div class="left-user3898">
-                            <img src="{% static '/image/images.png' %}" alt="Image"></div>
-
-                    </div>
-                    <div class="points-details938">
-                        <h5>Ahmed Hasan</h5>
-                        <span class="designetion439">Гений</span>
-                        <p>206 баллов</p>
-                    </div>
-                    <hr>
-                    <div class="pints-wrapper">
-                        <div class="left-user3898">
-                            <img src="{% static '/image/images.png' %}" alt="Image"></div>
-
-                    </div>
-                    <div class="points-details938">
-                        <h5>Ahmed Hasan</h5>
-                        <span class="designetion439">Гений</span>
-                        <p>206 баллов</p>
-                    </div>
-                    <hr>
-                    <div class="pints-wrapper">
-                        <div class="left-user3898">
-                            <img src="{% static '/image/images.png' %}" alt="Image"></div>
-
-                    </div>
-                    <div class="points-details938">
-                        <h5>Ahmed Hasan</h5>
-                        <span class="designetion439">Гений</span>
-                        <p>206 баллов</p>
-                    </div>
-                    <hr>
-                    <div class="pints-wrapper">
-                        <div class="left-user3898">
-                            <img src="{% static '/image/images.png' %}" alt="Image"></div>
-
-                    </div>
-                    <div class="points-details938">
-                        <h5>Ahmed Hasan</h5>
-                        <span class="designetion439">Гений</span>
-                        <p>206 баллов</p>
-                    </div>
-                </div>
-                <!--               end of Highest points -->
-            </aside>
-        </div>
-    </div>
-</section>
-<!--    footer -->
-<section class="footer-social">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <p>Сервис Спроси бауманца | <strong>Семенов Александр</strong></p>
-            </div>
-            <div class="col-md-6">
-                <div class="social-right2389"><a href="https://t.me/alex_fnaf"><i class="fa fa-telegram"
-                                                                                  aria-hidden="true"></i></a>
-                    <a href="https://vk.ru/alex_fnaf"><i class="fa fa-vk" aria-hidden="true"></i></a></div>
-            </div>
-        </div>
-    </div>
-</section>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min,js"></script>
-<script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
-<script src="{% static '/js/bootstrap.min.js' %}"></script>
-<script src="{% static '/js/editor.js' %}"></script>
-<script>
-    $(document).ready(function () {
-        $("#txtEditor").Editor();
-    });
-</script>
-</body>
-
-</html>
+{% endblock %}
