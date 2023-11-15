@@ -6,12 +6,6 @@ class ProfileManager(models.Manager):
     def leaders(self):
         return self.order_by('-points').values('user')[:10]
 
-    def get_user_by_qobj(self, qobj):
-        return qobj.author.annotate(type=Rating.objects.get_rating(models.F('points')))
-
-    def get_user_by_id(self, id):
-        return self.get(id=id)
-
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
@@ -23,8 +17,11 @@ class Profile(models.Model):
 
 class TagManger(models.Manager):
     def popular(self):
-        return self.annotate(count=Question.objects.filter(Tags__id=models.F('id')).count()
-                             ).order_by('-count')[:10].values_list('name', flat=True)
+        ids = list(Question.objects.annotate(
+            count=models.Count("tags__id")).order_by('-count')[:10].values_list('tags__id', flat=True))
+        return self.filter(id__in=ids)
+        # return self.alias(count=Question.objects.filter(Tags__id=models.F('id')).count()
+        #                   ).order_by('-count')[:10].values_list('name', flat=True)
 
 
 class Tag(models.Model):
@@ -45,14 +42,14 @@ class QuestionManager(models.Manager):
         return self.order_by("-likes", "-date_time")
 
     def with_tag(self, name):
-        tag_id = Tag.objects.get(name=name).id
-        return self.annotate(tag_id=tag_id).filter(tag_id__in=models.F("tags")).order_by("-date_time")
+        tag_id = Tag.objects.filter(name=name).values_list('id', flat=True)[0]
+        return Question.objects.filter(tags__id=tag_id).order_by("-date_time")
 
     def get_question(self, qid):
         return self.get(id=qid)
 
     def of_user(self, id):
-        return self.filter(author=Profile.objects.get_user_by_id(id)).order_by("-date_time")
+        return self.filter(author=Profile.objects.get(id=id)).order_by("-date_time")
 
 
 class Question(models.Model):
@@ -73,7 +70,7 @@ class Question(models.Model):
 
 class AnswerManager(models.Manager):
     def of_question(self, qobj):
-        return self.filter(question=qobj).annotate(user=models.F("author").user).order_by("-date_time")
+        return self.filter(question=qobj).order_by("-date_time")
 
 
 class Answer(models.Model):

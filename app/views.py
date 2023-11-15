@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.core.paginator import Paginator
+from app.models import *
 
 
 qs = [
@@ -57,18 +58,19 @@ def paginate(objects_list, request, name='page', per_page=20):
 
 
 def index(request):
-    obj1, page_num1, max_num1 = paginate(qs, request, 'page1')
-    obj2, page_num2, max_num2 = paginate(qs2, request, 'page2')
-    return render(request, 'index.html', {"directory": None, "page": "Главная", "leaders": users, "tags": tags,
-                                          "authorized": False, "questions": obj1, "questions2": obj2,
-                                          "page_num1": page_num1, "max_num1": max_num1,
+    obj1, page_num1, max_num1 = paginate(Question.objects.sorted_by_date(), request, 'page1')
+    obj2, page_num2, max_num2 = paginate(Question.objects.sorted_by_likes(), request, 'page2')
+    return render(request, 'index.html', {"directory": None, "page": "Главная", "leaders": Profile.objects.leaders(),
+                                          "tags": Tag.objects.popular(), "authorized": False, "questions": obj1,
+                                          "questions2": obj2, "page_num1": page_num1, "max_num1": max_num1,
                                           "range1": range(1, max_num1 + 1), "page_num2": page_num2,
                                           "max_num2": max_num2, "range2": range(1, max_num2 + 1)})
 
 
 def tag(request, page):
-    obj, page_num, max_num = paginate(qs, request)
-    return render(request, 'tag.html', {"directory": "Вопросы по тегам", "page": page, "leaders": users, "tags": tags,
+    obj, page_num, max_num = paginate(Question.objects.with_tag(page), request)
+    return render(request, 'tag.html', {"directory": "Вопросы по тегам", "page": page,
+                                        "leaders": Profile.objects.leaders(), "tags": Tag.objects.popular(),
                                         "authorized": True, "questions": obj, "page_num": page_num, "max_num": max_num,
                                         "range": range(1, max_num + 1)})
 
@@ -106,9 +108,11 @@ def question(request, page):
                 "felis. Quisque blandit posuere turpis, eget auctor felis pharetra eu.".split('\n')
     }
 
-    obj, page_num, max_num = paginate(answers, request, per_page=30)
-    return render(request, 'question.html', {"directory": "Вопрос", "page": page, "leaders": users, "tags": tags,
-                                             "authorized": True, "question": qs0, "user": users[0], "answers": obj,
+    qobj = Question.objects.get_question(page)
+    obj, page_num, max_num = paginate(Answer.objects.of_question(qobj), request, per_page=30)
+    return render(request, 'question.html', {"directory": "Вопрос", "page": page, "leaders": Profile.objects.leaders(),
+                                             "tags": Tag.objects.popular(), "authorized": True, "question": qobj,
+                                             "user": Profile.objects.get_user(qobj), "answers": obj,
                                              "page_num": page_num, "max_num": max_num, "range": range(1, max_num + 1)})
 
 
@@ -122,24 +126,24 @@ def signup(request):
 
 def ask(request):
     return render(request, 'ask_question.html', {"directory": "Личный кабинет", "page": "Задать вопрос",
-                                                 "leaders": users, "tags": tags, "authorized": True})
+                                                 "leaders": Profile.objects.leaders(), "tags": Tag.objects.popular(),
+                                                 "authorized": True})
+
+
+id = 10902
 
 
 def settings(request):
-    user = {
-        "id": 2,
-        "login": "alexf",
-        "nickname": "alex_fnaf",
-        "email": "alex@gmail.com"
-    }
-    return render(request, 'user_info.html', {"directory": "Личный кабинет", "page": "Задать вопрос", "leaders": users,
-                                              "tags": tags, "authorized": True, "user": user})
+    return render(request, 'user_info.html', {"directory": "Личный кабинет", "page": "Задать вопрос",
+                                              "leaders": Profile.objects.leaders(), "tags": Tag.objects.popular(),
+                                              "authorized": True, "user": Profile.objects.filter(user_id=id)[0]})
 
 
 def my_qs(request):
-    obj, page_num, max_num = paginate(qs[:5], request)
-    return render(request, 'tag.html', {"directory": "Личный кабинет", "page": "Мои вопросы", "leaders": users,
-                                        "tags": tags, "authorized": True, "questions": obj, "page_num": page_num,
+    obj, page_num, max_num = paginate(Question.objects.of_user(id), request)
+    return render(request, 'tag.html', {"directory": "Личный кабинет", "page": "Мои вопросы",
+                                        "leaders": Profile.objects.leaders(), "tags": Tag.objects.popular(),
+                                        "authorized": True, "questions": obj, "page_num": page_num,
                                         "max_num": max_num, "range": range(1, max_num + 1)})
 
 
