@@ -24,6 +24,7 @@
         <div class="modal-body modal-body-step-1 is-showing">
             <div class="title">Регистрация</div>
             <div class="description">Пожалуйста, введите данные для своего будущего аккаунта</div>
+            <div class="description" style="color:red;">Этот никнейм уже занят</div>
             <form>
                 <input type="text" name="login" required placeholder="Логин" pattern="^[a-zA-Z0-9_]+$"
                        title="Латинские буквы и/или цифры" minlength="5"/>
@@ -32,10 +33,10 @@
                 <input type="email" name="email" required placeholder="Почта" title="email@example.com"/>
                 <input type="password" name="password" id="myInput" required placeholder="Пароль" minlength="8"/>
                 <label><input type="checkbox" onclick="myFunction()"> Показать пароль</label>
-
+                <input type="file" name="image" accept="image/jpeg,image/png" style="margin-bottom: 20px;">
                 <div class="text-center">
-                    <a href="login">
-                        <div class="button">Войти</div>
+                    <a href="login" class="button_a">
+                        Войти
                     </a>
                     <input type="submit" class="button" value="Создать аккаунт" style="border: 0;">
                 </div>

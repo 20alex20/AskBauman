@@ -22,6 +22,7 @@
         <div class="modal-body modal-body-step-1 is-showing">
             <div class="title">Вход</div>
             <div class="description">Пожалуйста, введите данные своего аккаунта</div>
+            <div class="description" style="color:red;">Неверный логин или пароль</div>
             <form>
                 <input type="text" name="login" required placeholder="Логин" pattern="^[a-zA-Z0-9_]+$"
                        title="Латинские буквы и/или цифры" minlength="5"/>
@@ -29,8 +30,8 @@
                 <div class="text-center">
                     <input type="submit" class="button" value="Войти" style="border: 0;">
 
-                    <a href="signup">
-                        <div class="button">Создать аккаунт</div>
+                    <a href="signup" class="button_a">
+                        Создать аккаунт
                     </a>
                 </div>
             </form>
