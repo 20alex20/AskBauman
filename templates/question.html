@@ -24,6 +24,7 @@
                 <i class="fa fa-clock-o" aria-hidden="true"> {{ question.date_time }}</i>
                 <i class="fa fa-commenting" aria-hidden="true"> {{ question.num_answers }} ответов</i>
                 <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.num_likes }} лайков</i>
+                <i class="fa fa-thumbs-o-down" aria-hidden="true"> {{ question.num_dislikes }} дизлайков</i>
             </div>
         </div>
     </div>
@@ -49,7 +50,7 @@
     <div class="points-details938">
         <h5 style="margin: 0 0 10px 0;font-size: 16px !important;">{{ question.author.user.username }}</h5>
         <div>
-            <p>{{ question.author.points }} баллов</p></div>
+            <p style="margin: 0;">{{ question.author.points }} баллов</p></div>
     </div>
 </div>
 

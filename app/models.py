@@ -17,11 +17,8 @@ class Profile(models.Model):
 
 class TagManger(models.Manager):
     def popular(self):
-        ids = list(Question.objects.annotate(
-            count=models.Count("tags__id")).order_by('-count')[:10].values_list('tags__id', flat=True))
-        return self.filter(id__in=ids)
-        # return self.alias(count=Question.objects.filter(Tags__id=models.F('id')).count()
-        #                   ).order_by('-count')[:10].values_list('name', flat=True)
+        return Question.objects.annotate(
+            count=models.Count("tags__id")).order_by('-count')[:10].values_list('tags__name', flat=True)
 
 
 class Tag(models.Model):
@@ -81,15 +78,3 @@ class Answer(models.Model):
     is_solving = models.BooleanField(default=False)
 
     objects = AnswerManager()
-
-
-class RatingManager(models.Manager):
-    def get_rating(self, points):
-        return self.filter(minimum__gt=points).order_by('-minimum')[0].name
-
-
-class Rating(models.Model):
-    minimum = models.IntegerField()
-    name = models.CharField(max_length=32)
-
-    objects = RatingManager()
