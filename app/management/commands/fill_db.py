@@ -75,6 +75,7 @@ class Command(BaseCommand):
                 text='\n'.join((fake.text(), fake.text(), fake.text())),
                 num_likes=fake.random_int(min=0, max=num*100),
                 num_dislikes=fake.random_int(min=0, max=num*100),
+                num_answers=fake.random_int(min=0, max=num // 10),
                 solved=fake.boolean()
             ) for _ in range(num * 10)
         ]
@@ -84,7 +85,7 @@ class Command(BaseCommand):
         questions_count = questions.count()
         print("questions_bulk")
         for i, question in enumerate(questions):
-            question.tagquestion.add(*random_choice(tags, tags_count))
+            question.tags.add(*random_choice(tags, tags_count))
             question.likes.add(*random_choice(profiles, profiles_count))
             question.dislikes.add(*random_choice(profiles, profiles_count))
             if i % 100 == 0:

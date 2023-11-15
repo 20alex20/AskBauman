@@ -141,3 +141,7 @@ def my_qs(request):
     return render(request, 'tag.html', {"directory": "Личный кабинет", "page": "Мои вопросы", "leaders": users,
                                         "tags": tags, "authorized": True, "questions": obj, "page_num": page_num,
                                         "max_num": max_num, "range": range(1, max_num + 1)})
+
+
+def error_page(request):
+    return render(request, '404.html')

@@ -3,11 +3,14 @@ from django.contrib.auth.models import User
 
 
 class ProfileManager(models.Manager):
-    def popular(self):
-        return self.annotate(type=Rating.objects.get_rating(models.F('points'))).order_by('-count')[:10]
+    def leaders(self):
+        return self.order_by('-points').values('user')[:10]
 
-    def get_user(self, qobj):
+    def get_user_by_qobj(self, qobj):
         return qobj.author.annotate(type=Rating.objects.get_rating(models.F('points')))
+
+    def get_user_by_id(self, id):
+        return self.get(id=id)
 
 
 class Profile(models.Model):
@@ -43,10 +46,13 @@ class QuestionManager(models.Manager):
 
     def with_tag(self, name):
         tag_id = Tag.objects.get(name=name).id
-        return self.filter(Tags__id=tag_id).order_by("-date_time")
+        return self.annotate(tag_id=tag_id).filter(tag_id__in=models.F("tags")).order_by("-date_time")
 
     def get_question(self, qid):
         return self.get(id=qid)
+
+    def of_user(self, id):
+        return self.filter(author=Profile.objects.get_user_by_id(id)).order_by("-date_time")
 
 
 class Question(models.Model):
@@ -59,7 +65,7 @@ class Question(models.Model):
     likes = models.ManyToManyField(Profile, related_name="Likes")
     num_dislikes = models.IntegerField(default=0)
     dislikes = models.ManyToManyField(Profile, related_name="Dislikes")
-    answers = models.IntegerField(default=0)
+    num_answers = models.IntegerField(default=0)
     solved = models.BooleanField(default=False)
 
     objects = QuestionManager()
@@ -80,7 +86,7 @@ class Answer(models.Model):
     objects = AnswerManager()
 
 
-class RatingManager(models.Model):
+class RatingManager(models.Manager):
     def get_rating(self, points):
         return self.filter(minimum__gt=points).order_by('-minimum')[0].name
 
