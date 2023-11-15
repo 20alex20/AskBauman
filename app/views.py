@@ -39,8 +39,7 @@ users = [
     {
         "id": i,
         "nickname": "alex_fnaf",
-        "points": 206,
-        "type": "Гений"
+        "points": 206
     } for i in range(5)
 ]
 
@@ -128,7 +127,6 @@ def ask(request):
 def settings(request):
     user = {
         "id": 2,
-        "login": "alexf",
         "nickname": "alex_fnaf",
         "email": "alex@gmail.com"
     }
