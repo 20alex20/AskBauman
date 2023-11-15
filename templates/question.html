@@ -17,26 +17,24 @@
         </div>
     </div>
     <div class="post-details-info1982">
-        {% for p in question.text %}
-        <p>{{ p }}</p>
-        {% endfor %}
+        <p>{{ question.text }}</p>
         <hr>
         <div class="post-footer29032">
             <div class="l-side2023">
-                <i class="fa fa-clock-o" aria-hidden="true"> {{ question.datetime }}</i>
-                <i class="fa fa-commenting" aria-hidden="true"> {{ question.answers }} ответов</i>
-                <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.likes }} лайков</i>
+                <i class="fa fa-clock-o" aria-hidden="true"> {{ question.date_time }}</i>
+                <i class="fa fa-commenting" aria-hidden="true"> {{ question.num_answers }} ответов</i>
+                <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.num_likes }} лайков</i>
             </div>
         </div>
     </div>
 </div>
 
 <div class="share-tags-page-content12092" style="display: flex;justify-content: space-between;">
-    <button type="button" class="q-type23 button-ques2973" style="margin: 0;">
+    <button type="button" class="q-type23 button-ques2973" style="margin: 0 10px 0 0;">
         <i class="fa fa-thumbs-o-up" aria-hidden="true" style="font-size: 14px;"> Поставить лайк</i>
     </button>
     <div class="ques-icon-info3293" style="margin: auto 0;font-size: 14px;">
-        {% for tag in question.tags %}
+        {% for tag in question.tags.all %}
         <a href="{% url 'tag' page=tag %}"><i class="fa fa-tag" aria-hidden="true"> {{ tag }}</i></a>
         {% endfor %}
     </div>
@@ -49,9 +47,9 @@
         </div>
     </div>
     <div class="points-details938">
-        <h5 style="margin: 0 0 10px 0;font-size: 16px !important;">{{ user.nickname }}</h5>
-        <div style="font-size: 15px !important;"><span class="designetion439">{{ user.type }}</span>
-            <p style="float: right;">{{ user.points }} баллов</p></div>
+        <h5 style="margin: 0 0 10px 0;font-size: 16px !important;">{{ question.author.user.username }}</h5>
+        <div>
+            <p>{{ question.author.points }} баллов</p></div>
     </div>
 </div>
 
@@ -73,7 +71,7 @@
                                 <div class="comment-head">
                                     <h6 class="comment-name">{{ answer.user.nickname }}</h6>
                                     <div>
-                                        <i class="fa fa-clock-o" aria-hidden="true"> {{ answer.datetime }}</i>
+                                        <i class="fa fa-clock-o" aria-hidden="true"> {{ answer.date_time }}</i>
                                     </div>
                                     <span>Лучший ответ <i class="fa fa-square-o"></i></span>
                                 </div>

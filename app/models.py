@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 
 class ProfileManager(models.Manager):
     def leaders(self):
-        return self.order_by('-points').values('user')[:10]
+        return self.order_by('-points')[:10]
 
 
 class Profile(models.Model):
@@ -49,7 +49,7 @@ class QuestionManager(models.Manager):
         return self.get(id=qid)
 
     def of_user(self, id):
-        return self.filter(author=Profile.objects.get(id=id)).order_by("-date_time")
+        return self.filter(author=Profile.objects.get(user_id=id)).order_by("-date_time")
 
 
 class Question(models.Model):

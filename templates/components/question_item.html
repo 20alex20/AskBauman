@@ -23,7 +23,7 @@
                 {% if question.tags %}
                 <hr>
                 <div class="ques-icon-info3293">
-                    {% for tag in question.tags %}
+                    {% for tag in question.tags.all %}
                     <a href="{% url 'tag' page=tag %}"><i class="fa fa-tag" aria-hidden="true"> {{ tag }}</i></a>
                     {% endfor %}
                 </div>
@@ -34,17 +34,17 @@
             <div class="ques-type302">
                 <a href="{% url 'question' page=question.id %}">
                     <button type="button" class="q-type238 button-ques2973">
-                        <i class="fa fa-comment" aria-hidden="true"> {{ question.answers }} ответов</i>
+                        <i class="fa fa-comment" aria-hidden="true"> {{ question.num_answers }} ответов</i>
                     </button>
                 </a>
                 <div>
                     <button type="button" class="q-type23 cursor">
-                        <i class="fa fa-clock-o" aria-hidden="true"> {{ question.datetime }}</i>
+                        <i class="fa fa-clock-o" aria-hidden="true"> {{ question.date_time }}</i>
                     </button>
                 </div>
                 <div>
                     <button type="button" class="q-type23 button-ques2973">
-                        <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.likes }} лайков</i>
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"> {{ question.num_likes }} лайков</i>
                     </button>
                 </div>
             </div>
